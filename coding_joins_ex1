@@ -1,4 +1,4 @@
--- Active: 1717407623731@@127.0.0.1@3306@Metro_train
+-- ramdayal
 /*QUESTION 1
 Write a query to display the names and contact numbers of persons
  whose destination station is on the route 'North East line' with a payment of more than 25.
