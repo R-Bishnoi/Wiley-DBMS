@@ -1,4 +1,6 @@
--- Active: 1717407623731@@127.0.0.1@3306@electricity_bill
+-- Ramdayal
+
+-- electricity_bill
 /*QUESTION 1
 Write a query to display all the bills with meter details. Display the records in ascending order based on the payable amount.
 Input Format
