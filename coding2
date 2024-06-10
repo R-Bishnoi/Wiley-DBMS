@@ -1,0 +1,73 @@
+-- Active: 1717407623731@@127.0.0.1@3306@electricity_bill
+/*QUESTION 1
+Write a query to display all the bills with meter details. Display the records in ascending order based on the payable amount.
+Input Format
+The input tables are populated in the backend. 
+
+Output Format
+Follow the below output header for the query to be considered.
+id, meter_id, month, year, due_date, total_units, payable_amount, is_payed, payment_date, fine_amount, id, meter_number, building_id */
+
+SELECT bill.id, bill.meter_id, bill.month, bill.year, bill.due_date, bill.total_units, bill.payable_amount, bill.is_paid
+FROM bill
+JOIN meter ON bill.meter_id = meter.id;
+
+
+/*QUESTION 2
+Write a query to display the meter number, owner name, address, and contact number of all the buildings. Display the records in ascending order based on owner name and then by meter_number.
+Input Format
+The input tables are populated in the backend. 
+
+Output Format
+Follow the below output header for the query to be considered.
+meter_number, owner_name, address, contact_number*/
+
+SELECT meter.meter_number, building.owner_name, building.address, building.contact_number
+FROM meter
+JOIN building ON meter.building_id = building.id;
+
+
+/*QUESTION 3
+Write a query to display the meter number, owner name, address, contact number, building type name, and connection name of all buildings. Display the record in ascending order based on the owner's name and then by meter_number.
+Input Format
+The input tables are populated in the backend. 
+
+Output Format
+Follow the below output header for the query to be considered.
+meter_number, owner_name, address, contact_number, name, connection_name. */
+
+SELECT meter.meter_number, building.owner_name, building.address, building.contact_number, building_type.name, electricity_connection_type.connection_name
+FROM meter
+JOIN building ON meter.building_id = building.id
+JOIN building_type ON building.building_type_id = building_type.id
+JOIN electricity_connection_type ON building_type.connection_type_id = electricity_connection_type.id;
+
+
+/*QUESTION 4
+Write a query to display the connection name, from_unit, to_unit, and rate of all the slabs. Display the records in ascending order based on rate.
+Input Format
+The input tables are populated in the backend. 
+
+Output Format
+Follow the below output header for the query to be considered.
+connection_name, from_unit, to_unit, rate  */
+
+SELECT electricity_connection_type.connection_name, slab.from_unit, slab.to_unit, slab.rate
+FROM slab
+JOIN electricity_connection_type ON slab.connection_type_id = electricity_connection_type.id;
+
+
+/*QUESTION 5
+Write a query to display the building owner's name, address, and number of connections present in each building. Display the records in ascending order based on the owner's name. Give an alias name as connection_count.
+
+Input Format
+The input tables are populated in the backend. 
+
+Output Format
+Follow the below output header for the query to be considered.
+owner_name, address, connection_count*/
+
+SELECT building.owner_name, building.address, COUNT(meter.id) AS connection_count
+FROM building
+JOIN meter ON building.id = meter.building_id
+GROUP BY building.owner_name, building.address;
